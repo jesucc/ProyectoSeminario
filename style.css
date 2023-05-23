@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'popins',sans-serif;
+}
+body{
+    background-image: url(./img/aros_olimpicos_1280_00011.png);
+    background-position: center center;
+    background-repeat: no-repeat ;
+    background-size:cover ;
+    background-attachment:fixed ;
+}
+form{
+    position: relative;
+    border-radius: 40px;
+    margin-top: 220px;
+    width: 420px;
+    height: 420px;
+    padding: 50px;
+    backdrop-filter: blur(15px);
+    border: 3px solid rgba(0, 0, 0, 0.42);
+}
+
+.btn{
+    
+    width: 320px;
+    border: none;
+    border-radius: 50px;
+    background: rgb(25, 48, 91);
+    
+}
+
+.form-control{
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    border-bottom: 2px solid;
+    border-radius: 4px 4px 0 0; 
+    background-attachment:fixed ;
+    }
+ h4{
+    font-size: 2rem !important;
+    font-weight: 700;
+ }  
