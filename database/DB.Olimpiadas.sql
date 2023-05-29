@@ -10,12 +10,12 @@ CREATE TABLE personas
 	apellidos			VARCHAR 	(40) NOT NULL,
 	nombres				VARCHAR 	(40) NOT NULL,
 	documentoI			VARCHAR 	(10) NOT NULL,
-	numDocumento 		CHAR 		(20) NOT NULL,
+	numDocumento 			CHAR 		(20) NOT NULL,
 	genero				CHAR 	  	(1)  NOT NULL, -- Masculino(M), Femenino(F)
-	peso					CHAR     (10) NULL,
-	fechanacimiento 	DATE      	  NOT NULL,
-	edad					CHAR  	(3)  NOT NULL,
-	pais					VARCHAR 	(20) NOT NULL,
+	peso				CHAR     	(10) NULL,
+	fechanacimiento 		DATE      	NOT NULL,
+	edad				CHAR  		(3)  NOT NULL,
+	pais				VARCHAR 	(20) NOT NULL,
 	
 	CONSTRAINT uk_numDocumento_per 			UNIQUE(numDocumento), 
 	CONSTRAINT check_complejidad_per			CHECK(genero IN('M','F')),
@@ -33,26 +33,51 @@ INSERT INTO personas(apellidos, nombres, documentoI, numDocumento, genero, peso,
 ('Guillen Gallardo','Leydi Deyanira','RIC','1311528812','F','46 kilos','1988/12/10','35','Argentina'),
 ('Camacho Carrasco','Jesus','RIC','2311528232','M','40 kilos','2004/12/10','18','Argentina')
 
+-- -----------------------------------------------------------------------------------------------------------------------------------
+-- Usuario
 INSERT INTO personas(apellidos, nombres, documentoI, numDocumento, genero, fechanacimiento, edad,  pais)VALUES
 ('Camacho Mendoza','Edu','DNI','772223176','M','1993/01/06','30','Peru')
 
   
-  CREATE TABLE	usuarios
-  (
+CREATE TABLE usuarios
+(
 	idusuario		INT AUTO_INCREMENT PRIMARY KEY,
-	idpersona		INT NOT NULL,
-	nombreUsuario	VARCHAR(20) NOT NULL,
-	contraseña		VARCHAR(30) NOT NULL,
+	idpersona		INT 		NOT NULL,
+	nombreusuario		VARCHAR(70)	NOT NULL,
+	claveacceso		VARCHAR(90)	NOT NULL,
+	email			VARCHAR(70)	NOT NULL,
+	fecharegistro		DATETIME	NOT NULL DEFAULT NOW(),
+	estado			CHAR(1)		NOT NULL DEFAULT '1',
 	
-	CONSTRAINT fk_idpersona_usu FOREIGN KEY (idpersona) REFERENCES personas(idpersona),
-	CONSTRAINT uk_nombreUs_usu UNIQUE(nombreUsuario)
+	CONSTRAINT fk_idpersonausu_personas FOREIGN KEY (idpersona) REFERENCES personas (idpersona),
+	CONSTRAINT uk_nom_usuarios	UNIQUE (nombreusuario),
+	CONSTRAINT uk_email_usuarios	UNIQUE (email)
 	
-  )ENGINE = INNODB;
+)ENGINE = INNODB;
   
-  INSERT INTO usuarios (idpersona,nombreUsuario,contraseña)VALUES
-  (8,'Edu_CC','jesuscc')
+  
+  INSERT INTO usuarios (idpersona,nombreusuario,claveacceso , email)VALUES
+  (8,'jesu','jesuscc','jesu@gmail.com')
   
   SELECT * FROM usuarios;
+  
+  
+DELIMITER$$
+CREATE PROCEDURE spu_usuario_login(IN _email VARCHAR(70))
+BEGIN
+SELECT 	idusuario,
+	nombreusuario,
+	claveacceso,
+	email
+     FROM usuarios
+     WHERE email = _email AND estado ='1';
+END$$
+
+CALL spu_usuario_login ('jesu@gmail.com');
+
+UPDATE usuarios SET
+claveacceso = '$2y$10$fSTQcDmaZbPu3zL8ypwp..Xuulmqq2oxAER9pF14pYdMrNsjswBT2'
+WHERE idusuario =1;
 -- -----------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE entrenadores 

@@ -4,8 +4,8 @@ class Conexion{
 
   private function Conectar(){
     try{
-      $pdo = new PDO("mysql:host=localhost;port=3306;dbname=olimpiadas;charset=UTF8","root","");
-      return $pdo;
+      $conexion = new PDO("mysql:host=localhost;port=3306;dbname=olimpiadas;charset=utf8","root","");
+      return $conexion;
     }
     catch(Exception $e){
       die($e->getMessage());
