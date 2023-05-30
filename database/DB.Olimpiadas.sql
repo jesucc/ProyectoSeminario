@@ -78,50 +78,96 @@ CALL spu_usuario_login ('jesu@gmail.com');
 UPDATE usuarios SET
 claveacceso = '$2y$10$fSTQcDmaZbPu3zL8ypwp..Xuulmqq2oxAER9pF14pYdMrNsjswBT2'
 WHERE idusuario =1;
+
 -- -----------------------------------------------------------------------------------------------------------------------------------
 
+CREATE TABLE olimpiadas
+(
+  idolimpiada INT AUTO_INCREMENT PRIMARY KEY,
+  nombre	VARCHAR (50) NOT NULL,
+  fechaInicio	DATETIME     NOT NULL,
+  fechaFin	DATETIME     NOT NULL
+  
+)ENGINE = INNODB;
+
+INSERT INTO olimpiadas (nombre, fechaInicio, fechaFin) VALUES
+	('Olimpiadas/2023', '2023/07/01', '2023/11/01')
+
+SELECT * FROM olimpiadas;
+
+-- -----------------------------------------------------------------------------------------------------------------------------------
+CREATE TABLE delegaciones
+(
+	iddelegacion	INT AUTO_INCREMENT PRIMARY KEY,
+	nombre		VARCHAR(20) NOT NULL,
+	pais		VARCHAR(20) NOT NULL,
+	ciudad 		VARCHAR(30) NOT NULL,
+	direccion 	VARCHAR(30) NOT NULL,
+	equipoDe	VARCHAR(20) NOT NULL,
+	
+	CONSTRAINT uk_nombre_sed UNIQUE(nombre,direccion,equipoDe)
+	
+)ENGINE = INNODB;
+
+INSERT INTO delegaciones (nombre, pais, ciudad, direccion, equipoDe)VALUES
+('ATLETIC','Peru','Lima','AVN.Callao','E-1'),
+('CICLIT','Peru','Ica','AVN.chincha','E-2'),
+('BOXDT','Peru','Cusco','AVN.Cusco','E-3'),
+('BEIST','Peru','Lima','AVN.Lima', 'E-4')
+
+SELECT * FROM delegaciones;
+
+-- -----------------------------------------------------------------------------------------------------------------------------------
 CREATE TABLE entrenadores 
 (	
 	identrenador	INT AUTO_INCREMENT PRIMARY KEY,
-	idpersona		INT NOT NULL,
+	idpersona	INT NOT NULL,
+	idolimpiada	INT NOT NULL,
+	iddelegacion	INT NOT NULL,
 	
-	CONSTRAINT 	uk_idpersona_ent	FOREIGN KEY (idpersona) REFERENCES personas(idpersona)
+	CONSTRAINT uk_idpersona_ent FOREIGN KEY (idpersona) REFERENCES personas(idpersona),
+	CONSTRAINT uk_idolimpiada_ent FOREIGN KEY (idolimpiada) REFERENCES olimpiadas(idolimpiada),
+	CONSTRAINT uk_iddelegacion_ent FOREIGN KEY (iddelegacion) REFERENCES delegaciones(iddelegacion)
+	
 )ENGINE = INNODB;
 
-INSERT INTO entrenadores(idpersona)VALUES
-(1),
-(3),
-(5),
-(7)
+INSERT INTO entrenadores(idpersona, idolimpiada, iddelegacion)VALUES
+(1,1,1),
+(3,1,2),
+(5,1,3),
+(7,1,4)
 
 SELECT * FROM entrenadores;
 -- -----------------------------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE deportistas 
 (
 	iddeportista	INT AUTO_INCREMENT PRIMARY KEY,
-	idpersona		INT NOT NULL,
+	idpersona	INT NOT NULL,
 	identrenador	INT NOT NULL,
+	iddelegacion	INT NOT NULL,
 	
 	CONSTRAINT fk_idpersona_dep	FOREIGN KEY (idpersona) REFERENCES personas(idpersona),
-	CONSTRAINT fk_identrenador_dep  FOREIGN KEY (identrenador)  REFERENCES entrenadores(identrenador)
+	CONSTRAINT fk_identrenador_dep  FOREIGN KEY (identrenador)  REFERENCES entrenadores(identrenador),
+	CONSTRAINT fk_iddelegacion_dep	FOREIGN KEY (iddelegacion) REFERENCES delegaciones(iddelegacion)
 	
 )ENGINE = INNODB;
 
-INSERT INTO  deportistas (idpersona, identrenador)VALUES
-(2,1),
-(4,2),
-(6,3),
-(8,4)
+INSERT INTO  deportistas (idpersona, identrenador, iddelegacion)VALUES
+(2,1,1),
+(4,2,2),
+(6,3,3),
+(8,4,4)
 
 SELECT * FROM deportistas;
 -- ----------------------------------------------------------------------------------------------------------------------------------- 
 
 CREATE TABLE  deportes
 (
-	iddeporte			INT AUTO_INCREMENT PRIMARY KEY,
-	iddeportista		INT 				NOT NULL,
+	iddeporte		INT AUTO_INCREMENT PRIMARY KEY,
+	iddeportista		INT 		NOT NULL,
 	nombreDeporte		VARCHAR (50) 	NOT NULL,
-	descripcion			VARCHAR (200) 	NOT NULL,
+	descripcion		VARCHAR (200) 	NOT NULL,
 	
 	CONSTRAINT fk_iddeprotista_dep FOREIGN KEY (iddeportista) REFERENCES deportistas(iddeportista),
 	CONSTRAINT uk_nomD_dep UNIQUE (nombreDeporte)
@@ -140,12 +186,12 @@ SELECT * FROM deportes;
 
 CREATE TABLE resultados
 (
-	idresultado		 INT AUTO_INCREMENT PRIMARY KEY,
-	iddeportista	 INT NOT NULL,	
-	puntos			 VARCHAR (10) NOT NULL,
+	idresultado		INT AUTO_INCREMENT PRIMARY KEY,
+	iddeportista	 	INT 		NOT NULL,	
+	puntos			VARCHAR (10)    NOT NULL,
 	
-	CONSTRAINT	fk_iddeportista_rel FOREIGN KEY (iddeportista) REFERENCES deportistas(iddeportista),
-	CONSTRAINT  ch_punto_rel	CHECK(puntos>0)
+	CONSTRAINT  fk_iddeportista_rel FOREIGN KEY (iddeportista) REFERENCES deportistas(iddeportista),
+	CONSTRAINT  ck_punto_rel	CHECK(puntos>0)
 	
 )ENGINE=INNODB;
 
@@ -160,49 +206,28 @@ INSERT INTO resultados (iddeportista, puntos)VALUES
 SELECT * FROM resultados;
 -- ----------------------------------------------------------------------------------------------------------------------------------- 
 
-CREATE TABLE sedes
-(
-	idsede		INT AUTO_INCREMENT PRIMARY KEY,
-	nombre		VARCHAR(20),
-	pais			VARCHAR(20),
-	ciudad 		VARCHAR(30),
-	direccion 	VARCHAR(30),
-	
-	CONSTRAINT uk_nombre_sed UNIQUE(nombre),
-	CONSTRAINT uk_direccion_sed UNIQUE(direccion)
-	
-)ENGINE = INNODB;
-
-INSERT INTO sedes (nombre, pais, ciudad, direccion)VALUES
-('ATLETIC','Peru','Lima','AVN.Callao'),
-('CICLIT','Peru','Ica','AVN.chincha'),
-('BOXDT','Peru','Cusco','AVN.Cusco'),
-('BEIST','Peru','Lima','AVN.Lima')
-
-SELECT * FROM sedes;
--- ----------------------------------------------------------------------------------------------------------------------------------- 
-
 CREATE TABLE premiaciones
 (
-	idpremiacion	INT AUTO_INCREMENT PRIMARY KEY,
-	idsede			INT NOT NULL,
+	idpremiacion		INT AUTO_INCREMENT PRIMARY KEY,
+	idolimpiada		INT NOT NULL,
+	iddelegacion		INT NOT NULL,
 	idresultado		INT NOT NULL,
 	iddeporte		INT NOT NULL,
 	medalla			VARCHAR(10) NOT NULL,
 	numPuesto		CHAR(1) 		NOT NULL,		
 	fechaP			DATE 			NOT NULL,
 	
-	
-CONSTRAINT fk_idsede_pre FOREIGN KEY (idsede) REFERENCES sedes(idsede),
-CONSTRAINT fk_resultado_pre FOREIGN KEY (idresultado) REFERENCES resultados(idresultado),
-CONSTRAINT fk_iddeporte_pre FOREIGN KEY (iddeporte) REFERENCES deportes (iddeporte)
+	CONSTRAINT fk_idolimpiada_pre FOREIGN KEY (idolimpiada) REFERENCES olimpiadas(idolimpiada),
+	CONSTRAINT fk_iddelegacion_pre FOREIGN KEY (iddelegacion) REFERENCES delegaciones(iddelegacion),
+	CONSTRAINT fk_resultado_pre FOREIGN KEY (idresultado) REFERENCES resultados(idresultado),
+	CONSTRAINT fk_iddeporte_pre FOREIGN KEY (iddeporte) REFERENCES deportes (iddeporte)
 
 )ENGINE =INNODB;
 
-INSERT INTO premiaciones (idsede, idresultado, iddeporte, medalla, numPuesto, FechaP)VALUES
-(1,1,1,'Oro', 1, '2022/01/01'),
-(2,2,2,'Plata', 2, '2022/01/11'),
-(3,3,3,'Bronce', 3, '2022/01/13'),
-(4,4,4,'Oro', 4, '2022/01/04')
+INSERT INTO premiaciones (idolimpiada, iddelegacion, idresultado, iddeporte, medalla, numPuesto, FechaP)VALUES
+(1,1,1,1,'Oro', 1, '2022/01/01'),
+(1,2,2,2,'Plata', 2, '2022/01/11'),
+(1,3,3,3,'Bronce', 3, '2022/01/13'),
+(1,4,4,4,'Oro', 4, '2022/01/04')
 
 SELECT * FROM premiaciones;
