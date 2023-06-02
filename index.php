@@ -9,11 +9,14 @@
 
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  
   <link href="./style.css" rel="stylesheet" >
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
 </head>
 <body>
- 
+
     <style>
         .bold{
             font-weight: bold;
@@ -37,7 +40,7 @@
                 <input class="form-control" type="password"  placeholder="contraseña" id="password">
               </div>
 
-              <button class="btn btn-outline-secondary mt-3" id="iniciar-sesion" type="button">Inicar Sesion</button>
+              <button class="btn btn-outline-secondary mt-3" id="iniciar-sesion" type="button" onclick="inicio()" >Inicar Sesion</button>
               <button class="btn btn-outline-danger mt-2" type="reset">Cancelar</button>
             </form>
           </div>
@@ -46,6 +49,8 @@
   </div> 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+  
 
   <script>
     $(document).ready(function (){
@@ -64,10 +69,23 @@
           dataType: 'JSON',
           success: function (result){
             if (result.login){
-              alert(`Bienvenido: ${result.nombreusuario}`);
-              window.location.href = `views/menu.html`;
+              Swal.fire({
+                title: "Inicio Correctamente" ,
+                text: `${result.nombreusuario}`,
+                icon:   "success",
+                allowOutsideClick: false,
+
+                
+              }).then((result) => {
+                window.location.href = `views/menu.php`;
+               });
+        
             }else{
-              alert(result.mensaje);
+              Swal.fire({
+                title: (result.mensaje),
+                icon: "error",
+              });
+               
             }
           }
         });

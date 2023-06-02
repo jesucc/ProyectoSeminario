@@ -13,13 +13,14 @@
 </head>
 <body>
 
-    <div class="menu-dashboard">
-        
+    <nav class="menu-dashboard">
+        <header>
         <div class="top-menu">
             <div class="logo">
                 <img src="../img/juegos-olimpicos .png" alt="">
                 <span>OLIMPIADAS</span>
             </div>
+
             <div class="toggle">
                 <i class='bx bx-menu'></i>
             </div>
@@ -31,45 +32,49 @@
 
             <hr class="hr">
 
-            <div class="enlace">
-                <i class="bx bx-home"></i>
+
+            <a class = "enlace" href='inicio.html'>
+                <i class='bx bx-home'></i>
                 <span>Inicio</span>
-            </div>
+            </a>
+
             
-            <div class="enlace">
+            <a class="enlace" href='' >
                 <i class="bx bx-world"></i>
                 <span>Delegaciones</span>
-            </div>
+            </a>
 
-            <div class="enlace">
+            <a class="enlace" href=''>
                 <i class="bx bx-walk"></i>
                 <span>Deportista</span>
-            </div>
+            </a>
 
-            <div class="enlace">
+            <a class="enlace" href=''>
                 <i class="bx bx-medal"></i>
                 <span>Premiaciones</span>
-            </div>
+            </a>
 
-            <div class="enlace">
+            <a class="enlace" href=''>
                 <i class="bx bx-male"></i>
                 <span>Entrenadores</span>
-            </div>
+            </a>
 
-            <div class="enlace">
+            <a class="enlace" href=''>
                 <i class="bx bx-circle"></i>
                 <span>Deportes Olimpicos</span>
-            </div>
+            </a>
 
-            <div class="cerrar">
+
+            <a  class="cerrar" href=''>
                 <i class="bx bx-log-in"></i>
-                <span>Cerrar</span>
-            </div>
+            <span>Cerrar</span>
+
 
             
 
         </div>
-    </div>
-    
+        </header>
+    </nav>
+
 </body>
 </html>
