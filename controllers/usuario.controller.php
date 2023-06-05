@@ -8,7 +8,6 @@ if(isset($_GET['operacion'])){
 
   $usuario = new Usuario();
 
-
   if($_GET['operacion'] =='iniciarSesion'){
 
     $acceso =[

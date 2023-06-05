@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,7 +11,7 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   
-  <link href="./style.css" rel="stylesheet" >
+  <link href="style.css" rel="stylesheet" >
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
@@ -29,7 +30,6 @@
           <div class="card-body">
             <form class="mx-auto" action="" autocomplete="off">
               <h4 class="text-center">Inicio Sesion</h4>
-
               <div class="mb-3 mt-5">
                 <label  class="form-label bold" for="email">NOMBRE USUARIO:</label>
                 <input  class="form-control" type="email" id="email" placeholder="ejemplo@correo.com" autofocus>
@@ -40,7 +40,7 @@
                 <input class="form-control" type="password"  placeholder="contraseña" id="password">
               </div>
 
-              <button class="btn btn-outline-secondary mt-3" id="iniciar-sesion" type="button" onclick="inicio()" >Inicar Sesion</button>
+              <button class="btn btn-outline-secondary mt-3" id="iniciar-sesion" type="button" >Inicar Sesion</button>
               <button class="btn btn-outline-danger mt-2" type="reset">Cancelar</button>
             </form>
           </div>
@@ -77,7 +77,7 @@
 
                 
               }).then((result) => {
-                window.location.href = `views/menu.php`;
+                window.location.href = `menu.php`;
                });
         
             }else{
