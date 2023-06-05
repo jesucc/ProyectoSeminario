@@ -32,6 +32,7 @@ INSERT INTO personas(apellidos, nombres, documentoI, numDocumento, genero, peso,
 ('Guillen Gallardo','Leydi Deyanira','RIC','1311528812','F','46 kilos','1988/12/10','35','Argentina'),
 ('Camacho Carrasco','Jesus','RIC','2311528232','M','40 kilos','2004/12/10','18','Argentina')
 
+SELECT * FROM personas;
 -- -----------------------------------------------------------------------------------------------------------------------------------
 -- Usuario
 INSERT INTO personas(apellidos, nombres, documentoI, numDocumento, genero, fechanacimiento, edad,  pais)VALUES
@@ -271,7 +272,7 @@ CREATE PROCEDURE spu_personas_registrar
 	IN _nombres    		VARCHAR (40),
 	IN _documentoI   	VARCHAR (10),
 	IN _numDocumento 	CHAR 	(20),
-	IN _Genero  		CHAR 	(1)
+	IN _genero  		CHAR 	(1)
 )
 BEGIN 
 	INSERT INTO personas (apellidos  , nombres , documentoI , numDocumento , Genero)  VALUES
@@ -280,7 +281,7 @@ BEGIN
 END $$
 
 CALL spu_personas_registrar ('Melgar Quispe', 'Pedro','DNI','73224253','M');
-CALL spu_personas_registrar ('Fretel', 'Yefer','DNI','73244553','M');
+CALL spu_personas_registrar ('Fretel', 'Yefer','DNI','73214553','M');
 
 -- ----------------------------------------------------------------------------------------------------------------------------------- 
 DELIMITER $$
@@ -299,6 +300,7 @@ BEGIN
 		(_idpersona , _iddeporte, _identrenador, _iddelegacion, _idpremiacion);
 	
 END $$
+
 
 CALL  spu_Deportista_registrar (10,2,1,1,6);
 

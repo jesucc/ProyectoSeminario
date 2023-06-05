@@ -77,7 +77,7 @@
 
                 
               }).then((result) => {
-                window.location.href = `menu.php`;
+                window.location.href = `Inicio.php`;
                });
         
             }else{
