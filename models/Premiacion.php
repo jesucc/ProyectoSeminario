@@ -14,9 +14,9 @@ class Premiacion extends Conexion{
 
   //Metodos
 
-  public function listarPremiacion(){
+  public function listarpremiacion(){
     try{
-      $consulta = $this->conexion->prepare("CALL spu_premiacion_listar()");
+      $consulta = $this->conexion->prepare("CALL spu_premiaciones_listar()");
       $consulta->execute();
       return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }

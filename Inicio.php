@@ -48,7 +48,6 @@
                         <a class="nav-link active" aria-current="page" href="./Inicio.php"><i class='bx bx-home-alt icon' ></i>INCIO</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="./delegaciones.php"><i class='bx bx-world icon' ></i>DELEGACIONES</a>
                       </li>
 
                           <button type ="button" class="btn btn-outline-dark mt-5"href="./controllers/usuario.controllers.php?operacion=destroy"  id="Cerrar"> <i class='bx bx-log-out icon' ></i>CERRAR</button>
@@ -68,48 +67,69 @@
 
     <div class="container">
 
+       <div class="row mt-3">
+          
 
-   <div class="container">
-     <div class="responsivo">
-      <span class="text nav-text"> <i class='bx bx-medal icon' ></i>PREMIACIONES</span>
-      
-      <div class="col-md-12 mt-4">
-        <table id="tablaPremiacion" class="table table-bordered border-black  table-striped table-hover" >
-          <thead>
-            <tr>
-              <th>#</th>
-            <th>Nombre</th>
-            <th>Deportistas</th>
-            <th>Entrenadores</th>
-            <th>NombreDeporte</th>
-            <th>Num Puesto</th>
-            <th>Medalla</th>
-            <th>Puntos</th>
-            <th>Command</th>
-
-            </tr>
-          </thead>    
-          <tbody>
-            <!--asincronico-->
-          </tbody>
-        </table>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-body"> 
+          <span class="text" style="font-size:25px;" > <i class='bx bx-medal icon'  ></i>PREMIAR DEPORTISTA</span>
+           <hr>
+        
+          
+          <div class="input-group mt-4 mr-4">
+          <button type ="button" class="btn btn-outline-dark btn-sm" id="exportar" data-bs-toggle="modal" data-bs-target="#modalId"> + AGREGAR PREMIACIÓN</button>
+  
+          </div>
+        
+        </div>
+        </div>
+        
       </div>
 
+      <div class="col-md-4">
+            <div class="card">
+                <div class="card-body"> 
+                  <span class="text" style="font-size:25px;"> <i class='bx bx-world icon' ></i>BUSCAR OLIMPIADA</span>
 
+                  <hr>
+                  <div class="input-group">
+
+                      <div class="form-floating">
+                        <select class="form-select" id="olimpiada">
+                          <option selected>Seleccione</option>
+                        </select>
+                        <label for="">Olimpiada</label>
+                      </div> 
+                  </div>
+
+                </div>
+            </div>
+          </div>
+    </div>
     
-      <!-- Modal trigger button -->
-      <div class="row g-2  mt-3 ">
-      <button type ="button" class="btn btn-outline-dark " data-bs-toggle="modal" data-bs-target="#modalId">
-        REGISTRAR PERSONA
-      </button> 
-      <button type ="button" class="btn btn-outline-dark " data-bs-toggle="modal" data-bs-target="#modal">
-        REGISTRAR PREMIACION
-      </button>
-      </div>
 
-      
-      
-      <!-- Modal Body -->
+    <div class="row mt-3">
+
+      <table id="tablaPremiacion" class="table table-bordered border-black  table-striped table-hover" >
+        <thead>
+        <th>#</th>
+            <th>Olimpiada</th>
+            <th>Delegación</th>
+            <th>Deportista</th>
+            <th>Deporte</th>
+            <th>Medalla</th>
+            <th>Puesto</th>
+            <th>Fecha</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+     </div>
+
+     
+
       <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
       <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
@@ -121,39 +141,128 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col-12">
-                <form action="" autocomplete="off" id="Personas">
+                <form action="" autocomplete="off" id="premiaciones">
                   <div class="card">  
                     <div class="card-body">
                       <div class="mb-3">
-                          <label for="apellidos" class="form-label">Apellidos</label>
-                          <input type="text" id="apellidos" class="form-control form-control-sm">
+                      <div class="input-group">
+
+                      <div class="form-floating">
+                        <select class="form-select" id="deportista">
+                          <option selected>Seleccione</option>
+                        </select>
+                        <label for="">Deportista</label>
+                      </div> 
+                  </div>
                         </div>
 
                         <div class="mb-3">
-                          <label for="nombres" class="form-label">Nombres</label>
-                          <input type="text" id="nombres" class="form-control form-control-sm">
+                        <div class="input-group">
+
+                        <div class="form-floating">
+                          <select class="form-select" id="premiacion">
+                            <option selected>Seleccione</option>
+                          </select>
+                          <label for="">Malla</label>
+                        </div> 
+
+                      
+                        </div>
                         </div>
                         
                         <div class="mb-3">
-                          <label for="documentoI" class="form-label">DocumentoI</label>
-                          <input type="text" id="documentoI" class="form-control form-control-sm">
+                          <div class="input-group">
+
+                          <div class="form-floating">
+                            <select class="form-select" id="entrenador">
+                              <option selected>Seleccione</option>
+                            </select>
+                            <label for="">Entrenador</label>
+                          </div> 
+
+                    
+                          </div>
                         </div>
+                      
+                      <div class="card-footer text-muted">
+                      <div class="d-grid gap-2"> 
 
-                        <div class="mb-3">
-                          <label for="numDocumento" class="form-label">NumeroD</label>
-                          <input type="text" id="numDocumento" class="form-control form-control-sm">
-                        </div>
+                          <button type ="button" class="btn btn-outline-dark  " id="guardar" >Registrar</button>
+                          
 
-                        <div class="mb-3">
-                        <label for="genero" class="form-label">Genero</label>
-                        <select id="genero" class="form-select form-select-sm" autofocus>
-                          <option value="">Seleccione</option>
-                          <option value="M">M</option>
-                          <option value="F">F</option>
-                          <option value="N/O">N/O</option>
-
-                        </select>
+                          
                       </div>
+                      </div>
+                    </div>
+                </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+
+  
+    
+  
+    </div>
+  <div class="container">
+  <div class="modal fade" id="modaldeportes" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitleId">REGISTRAR PERSONSA</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-12">
+                <form action="" autocomplete="off" id="premiacion">
+                  <div class="card">  
+                    <div class="card-body">
+                      <div class="mb-3">
+                      <div class="input-group">
+
+                      <div class="form-floating">
+                        <select class="form-select" id="deportista">
+                          <option selected>Seleccione</option>
+                        </select>
+                        <label for="">Deportista</label>
+                      </div> 
+
+                    <button type ="button" class="btn btn-outline-dark btn-sm" id="exportar">+</button>
+                  </div>
+                        </div>
+
+                        <div class="mb-3">
+                        <div class="input-group">
+
+                        <div class="form-floating">
+                          <select class="form-select" id="publishers">
+                            <option selected>Seleccione</option>
+                          </select>
+                          <label for="">Malla</label>
+                        </div> 
+
+                        <button type ="button" class="btn btn-outline-dark btn-sm" id="exportar">AGREGAR PREMIACIÓN</button>
+                        </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                          <div class="input-group">
+
+                          <div class="form-floating">
+                            <select class="form-select" id="publishers">
+                              <option selected>Seleccione</option>
+                            </select>
+                            <label for="">Entrenador</label>
+                          </div> 
+
+                          <button type ="button" class="btn btn-outline-dark btn-sm" id="exportar">+</button>
+                          </div>
+                        </div>
                       
                       <div class="card-footer text-muted">
                       <div class="d-grid gap-2"> 
@@ -175,70 +284,8 @@
       </div> 
     </div>
 
-    <div class="modal fade" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalTitleId">REGISTRAR PREMIACION</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-12">
-                <form action="" autocomplete="off" id="premiacion">
-                  <div class="card">  
-                    <div class="card-body">
-                    <div class="mb-3">
-                        <label for="idpersona" class="form-label">IdPersona</label>
-                        <select id="idpersona" class="form-select form-select-sm" autofocus>
-                          <option value="">Seleccione</option>
-                        </select>
-  
-                        <div class="mb-3">
-                        <label for="iddeporte" class="form-label">IdDeporte</label>
-                        <select id="iddeporte" class="form-select form-select-sm" autofocus>
-                          <option value="">Seleccione</option>
-
-                        </select>
-                        
-                        <div class="mb-3">
-                        <label for="identrenador" class="form-label">IdEntrenador</label>
-                        <select id="identrenador" class="form-select form-select-sm" autofocus>
-                          <option value="">Seleccione</option>
-
-                        </select>
-                        <div class="mb-3">
-                        <label for="iddelegacion" class="form-label">IdDelegacion</label>
-                        <select id="iddelegacion" class="form-select form-select-sm" autofocus>
-                          <option value="">Seleccione</option>
-
-                        </select>
-
-                        <div class="mb-3">
-                        <label for="idpremiacion" class="form-label">IdPremiacion</label>
-                        <select id="idpremiacion" class="form-select form-select-sm" autofocus>
-                          <option value="">Seleccione</option>
-
-                        </select>
-                      
-                      <div class="card-footer text-muted">
-                      <div class="d-grid gap-2"> 
-
-                          <button type ="button" class="btn btn-outline-dark  " id="registrarD">Registrar</button>
-                          <button type ="button" class="btn btn-outline-danger"  type="reset">Reiniciar</button>
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      </div>
-                      </div>
-                    </div>
-                </form>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>    
-    </div>
+  </div>
+    
 
 
     
@@ -256,15 +303,33 @@
         const tablaPremiacion = document.querySelector("#tablaPremiacion");
         const cuerpoTabla = tablaPremiacion.querySelector("tbody");
         const modal = new bootstrap.Modal(document.querySelector("#modalId"));
-        const btGuardar = document.querySelector("#registrar");
-        const GuardarP = document.querySelector("#registrarD");
-        const listaP = document.querySelector("#idpersona");
-        const listaD = document.querySelector("#iddeporte");
-        const listaE = document.querySelector("#identrenador");
-        const listaM = document.querySelector("#idpremiacion");
-        const listaL= document.querySelector("#iddelegacion");
+        const btGuardar = document.querySelector("#guardar");
+        const lista = document.querySelector("#olimpiada");
+        const listaD = document.querySelector("#deportista");
+        const listaP = document.querySelector("#premiacion");
+        const listaE = document.querySelector("#entrenador");
+   
    
 
+        function obtenerolimpiada(){
+          const parametros = new URLSearchParams();
+          parametros.append("operacion","listarolimpiada");
+           
+          fetch('./controllers/olimpiada.php',{
+            method: 'POST',
+            body: parametros
+          })
+            .then(respuesta => respuesta.json())
+            .then(datos =>{
+              console.log(datos);
+              datos.forEach(element => { //recorre
+                const optionTag = document.createElement("option");
+                optionTag.value = element.idolimpiada; 
+                optionTag.text = element.nombre; 
+                lista.appendChild(optionTag);
+              });
+            })
+        }
         function renderPremiacion(){
           const parameters = new URLSearchParams();
           parameters.append("operacion", "listarPremiacion");
@@ -281,17 +346,14 @@
               const fila = `
               <tr>
                   <td>${numeroFila}</td>
-                  <td>${element.nombre}</td>
-                  <td>${element.Deportistas}</td>
-                  <td>${element.Entrenador}</td>
+                  <td>${element.Olimpiada}</td>
+                  <td>${element.Delegaciones}</td>
+                  <td>${element.Deportista}</td>
                   <td>${element.nombreDeporte}</td>
-                  <td>${element.numPuesto}</td>
                   <td>${element.medalla}</td>
-                  <td>${element.puntos}</td>
-                  <td>
-                    <a href='#'class=' eliminar btn btn-danger btn-sm ' data-idproducto='${element.idautomovil}'>Eliminar</a>
-                    <a href='#'class='editar btn btn-success btn-sm ' data-idproducto='${element.idautomovil}'>Editar</a>  
-                  </td>
+                  <td>${element.numPuesto}</td>
+                  <td>${element.fechaP}</td>
+                  
                 </tr>
               `;
               
@@ -302,140 +364,65 @@
          });
         }
         
-        function listaridpersona(){
+        function listardeportista(){
           const parametros = new URLSearchParams();
-          parametros.append("operacion","listaridpersona");
-          
-          fetch('./controllers/Rpremiacion.controller.php',{
+          parametros.append("operacion", "listardeportista");
+
+          fetch('./controllers/deportista.php', {
             method: 'POST',
             body: parametros
-           
           })
             .then(respuesta => respuesta.json())
-            .then(datos =>{
+            .then(datos  =>{
               console.log(datos);
-              datos.forEach(element => { 
+                datos.forEach(element => { //recorre
                 const optionTag = document.createElement("option");
                 optionTag.value = element.idpersona; 
-                optionTag.text = element.idpersona; 
-                listaP.appendChild(optionTag);
-              });
-            })
-        }
-
-        
-        function listarideporte(){
-          const parametros = new URLSearchParams();
-          parametros.append("operacion","listarideporte");
-          
-          fetch('./controllers/Rpremiacion.controller.php',{
-            method: 'POST',
-            body: parametros
-           
-          })
-            .then(respuesta => respuesta.json())
-            .then(datos =>{
-              console.log(datos);
-              datos.forEach(element => { 
-                const optionTag = document.createElement("option");
-                optionTag.value = element.iddeporte; 
-                optionTag.text = element.iddeporte; 
+                optionTag.text = element.deportista; 
                 listaD.appendChild(optionTag);
               });
             })
         }
-
-        function listaridentrenador(){
+        
+        function listarentrenador(){
           const parametros = new URLSearchParams();
-          parametros.append("operacion","listaridentrenador");
-          
-          fetch('./controllers/Rpremiacion.controller.php',{
+          parametros.append("operacion", "listarentrenador");
+
+          fetch('./controllers/entrenador.php', {
             method: 'POST',
             body: parametros
-           
           })
             .then(respuesta => respuesta.json())
-            .then(datos =>{
+            .then(datos  =>{
               console.log(datos);
-              datos.forEach(element => { 
+                datos.forEach(element => { //recorre
                 const optionTag = document.createElement("option");
                 optionTag.value = element.identrenador; 
-                optionTag.text = element.identrenador; 
+                optionTag.text = element.entrenador; 
                 listaE.appendChild(optionTag);
               });
             })
         }
 
-        function listaridpremiacion(){
+
+        function listarpremiacion(){
           const parametros = new URLSearchParams();
-          parametros.append("operacion","listaridpremiacion");
-          
-          fetch('./controllers/Rpremiacion.controller.php',{
+          parametros.append("operacion", "listarpremiacion");
+
+          fetch('./controllers/premiaciones.php', {
             method: 'POST',
             body: parametros
-           
           })
             .then(respuesta => respuesta.json())
-            .then(datos =>{
+            .then(datos  =>{
               console.log(datos);
-              datos.forEach(element => { 
+                datos.forEach(element => { //recorre
                 const optionTag = document.createElement("option");
                 optionTag.value = element.idpremiacion; 
-                optionTag.text = element.idpremiacion; 
-                listaM.appendChild(optionTag);
+                optionTag.text = element.medalla; 
+                listaP.appendChild(optionTag);
               });
             })
-        }
-
-        function listariddelegacion(){
-          const parametros = new URLSearchParams();
-          parametros.append("operacion","listariddelegacion");
-          
-          fetch('./controllers/Rpremiacion.controller.php',{
-            method: 'POST',
-            body: parametros
-           
-          })
-            .then(respuesta => respuesta.json())
-            .then(datos =>{
-              console.log(datos);
-              datos.forEach(element => { 
-                const optionTag = document.createElement("option");
-                optionTag.value = element.iddelegacion; 
-                optionTag.text = element.iddelegacion; 
-                listaL.appendChild(optionTag);
-              });
-            })
-        }
-
-
-        function personaRegister(){
-          if(confirm("¿Está seguro de registrar?")){
-            const parametros = new URLSearchParams();
-            parametros.append("operacion", "registrarPersona");
-
-            parametros.append("apellidos", document.querySelector("#apellidos").value);
-            parametros.append("nombres", document.querySelector("#nombres").value);
-            parametros.append("documentoI", document.querySelector("#documentoI").value);
-            parametros.append("numDocumento", document.querySelector("#numDocumento").value);
-            parametros.append("genero", document.querySelector("#genero").value);
-
-            fetch("./controllers/Rpremiacion.controller.php",{
-              method: "POST",
-              body: parametros
-            })
-            .then(response => response.json())
-            .then(datos => {
-              console.log(datos);
-              if(datos.status){
-                
-                document.querySelector("#Personas").reset();
-                document.querySelector("#genero").focus();
-              }else{
-                alert(datos.message);
-              }
-            });
-          }
         }
 
         function registrarPremiacion(){
@@ -443,11 +430,9 @@
             const parametros = new URLSearchParams();
             parametros.append("operacion", "registrarPremiacion");
 
-            parametros.append("idpersona", document.querySelector("#idpersona").value);
-            parametros.append("iddeporte", document.querySelector("#iddeporte").value);
-            parametros.append("identrenador", document.querySelector("#identrenador").value);
-            parametros.append("iddelegacion", document.querySelector("#idpremiacion").value);
-            parametros.append("idpremiacion", document.querySelector("#iddelegacion").value);
+            parametros.append("idpersona", document.querySelector("#deportista").value);
+            parametros.append("idpremiacion", document.querySelector("#premiacion").value);
+            parametros.append("identrenador", document.querySelector("#entrenador").value);
 
             fetch("./controllers/Rpremiacion.controller.php",{
               method: "POST",
@@ -455,10 +440,11 @@
             })
             .then(response => response.json())
             .then(datos => {
+              console.log(datos);
               if(datos.status){
-                
-                document.querySelector("#premiacion").reset();
-                renderPremiacion();
+                 renderPremiacion();
+                document.querySelector("#premiaciones").reset();
+               
               }else{
                 alert(datos.message);
               }
@@ -466,15 +452,16 @@
           }
         }
 
-      listaridpersona();
-      listarideporte();
-      listaridentrenador();
-      listaridpremiacion();
-      listariddelegacion();
 
-      btGuardar.addEventListener("click", personaRegister);
-      GuardarP.addEventListener("click", registrarPremiacion);
-      renderPremiacion();
+
+      lista.addEventListener("change",renderPremiacion);
+
+      btGuardar.addEventListener("click", registrarPremiacion);
+      
+      listarentrenador();
+      listarpremiacion();
+      listardeportista();
+      obtenerolimpiada();
     });
 
     
